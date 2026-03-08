@@ -1,15 +1,15 @@
 
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { MOCK_TRAINS } from '../mockData';
-import { Station } from '../types';
+import { Station, Train } from '../types';
 import { Search, RefreshCw, Clock, ArrowRight, Share2, Info, MapPin, Navigation } from 'lucide-react';
 
 interface ScheduleProps {
   activeStation: Station;
+  trains: Train[];
 }
 
-const Schedule: React.FC<ScheduleProps> = ({ activeStation }) => {
+const Schedule: React.FC<ScheduleProps> = ({ activeStation, trains }) => {
   const { t } = useTranslation();
   const [isRefreshing, setIsRefreshing] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
@@ -19,7 +19,7 @@ const Schedule: React.FC<ScheduleProps> = ({ activeStation }) => {
     setTimeout(() => setIsRefreshing(false), 800);
   };
 
-  const filteredTrains = MOCK_TRAINS.filter(t =>
+  const filteredTrains = trains.filter(t =>
     t.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
     t.number.includes(searchTerm)
   );

@@ -9,8 +9,8 @@ import Schedule from './components/Schedule';
 import AdminPanel from './components/AdminPanel';
 import StationMap from './components/StationMap';
 import Home from './components/Home';
-import { MOCK_USERS, MOCK_STATIONS } from './mockData';
-import { User, Station } from './types';
+import { MOCK_USERS, MOCK_STATIONS, MOCK_TRAINS } from './mockData';
+import { User, Station, Train } from './types';
 import { Train as TrainIcon, Lock, Mail, ArrowRight, ShieldCheck } from 'lucide-react';
 
 const GUEST_USER: User = {
@@ -22,7 +22,9 @@ const GUEST_USER: User = {
 
 const App: React.FC = () => {
   const [user, setUser] = useState<User>(GUEST_USER);
-  const [activeStation, setActiveStation] = useState<Station>(MOCK_STATIONS[0]);
+  const [stations, setStations] = useState<Station[]>(MOCK_STATIONS);
+  const [trains, setTrains] = useState<Train[]>(MOCK_TRAINS);
+  const [activeStation, setActiveStation] = useState<Station>(stations[0]);
   const [currentView, setCurrentView] = useState('home');
   const [isDark, setIsDark] = useState(true);
 
@@ -135,14 +137,14 @@ const App: React.FC = () => {
 
   const renderView = () => {
     switch (currentView) {
-      case 'dashboard': return <Dashboard activeStation={activeStation} onNavigate={() => setCurrentView('navigation')} />;
+      case 'dashboard': return <Dashboard activeStation={activeStation} trains={trains} onNavigate={() => setCurrentView('navigation')} />;
       case 'locator': return <Locator activeStation={activeStation} />;
       case 'navigation': return <Assistant activeStation={activeStation} />;
-      case 'schedule': return <Schedule activeStation={activeStation} />;
+      case 'schedule': return <Schedule activeStation={activeStation} trains={trains} />;
       case 'map': return <StationMap station={activeStation} />;
-      case 'admin': return <AdminPanel />;
+      case 'admin': return <AdminPanel stations={stations} setStations={setStations} trains={trains} setTrains={setTrains} />;
       case 'login': return renderLoginView();
-      default: return <Dashboard activeStation={activeStation} onNavigate={() => setCurrentView('navigation')} />;
+      default: return <Dashboard activeStation={activeStation} trains={trains} onNavigate={() => setCurrentView('navigation')} />;
     }
   };
 
@@ -160,6 +162,7 @@ const App: React.FC = () => {
   return (
     <Layout
       user={user}
+      stations={stations}
       activeStation={activeStation}
       onStationChange={setActiveStation}
       onLogout={handleLogout}

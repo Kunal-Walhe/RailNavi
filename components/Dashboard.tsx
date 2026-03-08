@@ -1,17 +1,17 @@
 
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { MOCK_TRAINS } from '../mockData';
-import { Station } from '../types';
+import { Station, Train } from '../types';
 // Fixed error: Added Navigation2 to the lucide-react import list
 import { Train as TrainIcon, Map, Users, Clock, AlertCircle, ArrowUpRight, Navigation2 } from 'lucide-react';
 
 interface DashboardProps {
   activeStation: Station;
+  trains: Train[];
   onNavigate: () => void;
 }
 
-const Dashboard: React.FC<DashboardProps> = ({ activeStation, onNavigate }) => {
+const Dashboard: React.FC<DashboardProps> = ({ activeStation, trains, onNavigate }) => {
   const { t } = useTranslation();
 
   return (
@@ -78,7 +78,7 @@ const Dashboard: React.FC<DashboardProps> = ({ activeStation, onNavigate }) => {
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-100 dark:divide-slate-800/50">
-                {MOCK_TRAINS.map((train) => (
+                {trains.map((train) => (
                   <tr key={train.id} className="hover:bg-blue-50/50 dark:hover:bg-blue-900/10 transition-colors text-sm">
                     <td className="px-6 py-4">
                       <p className="font-bold text-blue-800 dark:text-blue-300">{train.number}</p>

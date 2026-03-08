@@ -2,7 +2,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { User, UserRole, Station } from '../types';
-import { MOCK_STATIONS } from '../mockData';
 import {
   Train as TrainIcon,
   MapPin,
@@ -24,6 +23,7 @@ import {
 interface LayoutProps {
   children: React.ReactNode;
   user: User;
+  stations: Station[];
   activeStation: Station;
   onStationChange: (station: Station) => void;
   onLogout: () => void;
@@ -36,6 +36,7 @@ interface LayoutProps {
 const Layout: React.FC<LayoutProps> = ({
   children,
   user,
+  stations,
   activeStation,
   onStationChange,
   onLogout,
@@ -61,7 +62,7 @@ const Layout: React.FC<LayoutProps> = ({
     { id: 'locator', label: t('common.locator'), icon: Search, roles: ['PASSENGER'] as UserRole[] },
     { id: 'map', label: t('common.station_map'), icon: MapIcon, roles: ['PASSENGER', 'ADMIN'] as UserRole[] },
     { id: 'navigation', label: t('common.ai_assistant'), icon: Navigation2, roles: ['PASSENGER'] as UserRole[] },
-    { id: 'admin', label: t('common.admin_panel'), icon: Settings, roles: [] as UserRole[] },
+    { id: 'admin', label: t('common.admin_panel'), icon: Settings, roles: ['ADMIN'] as UserRole[] },
     { id: 'login', label: t('common.official_login'), icon: LogIn, roles: [] as UserRole[], showOnlyForGuest: true },
   ];
 
@@ -179,7 +180,7 @@ const Layout: React.FC<LayoutProps> = ({
                       {t('common.select_junction')}
                     </div>
                     <div className="max-h-96 overflow-y-auto">
-                      {MOCK_STATIONS.map(s => (
+                      {stations.map(s => (
                         <button
                           key={s.id}
                           onClick={() => {

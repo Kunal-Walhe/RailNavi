@@ -152,7 +152,7 @@ const AdminPanel: React.FC<AdminPanelProps> = ({ stations, setStations, trains, 
               </button>
             </div>
           </div>
-          <div className="grid grid-cols-2 gap-4 mb-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
             <div>
               <label className="text-[10px] font-bold text-gray-500 uppercase tracking-widest">Name</label>
               <input type="text" value={editForm.name || ''} onChange={(e) => setEditForm(prev => ({ ...prev, name: e.target.value }))} className="w-full mt-1 px-3 py-2 bg-white dark:bg-slate-950 border border-gray-300 dark:border-slate-700 rounded-lg text-sm text-gray-900 dark:text-gray-100 font-bold outline-none focus:border-blue-500" />
@@ -200,12 +200,12 @@ const AdminPanel: React.FC<AdminPanelProps> = ({ stations, setStations, trains, 
             </button>
           </div>
         </div>
-        <div className="grid grid-cols-3 gap-4 mb-4">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-4">
           <div className="bg-white dark:bg-slate-900 p-4 rounded-2xl border border-gray-200 dark:border-slate-800">
             <p className="text-[9px] text-gray-500 dark:text-slate-500 font-black uppercase tracking-widest mb-1">{t('admin.platforms')}</p>
             <p className="text-xl font-black text-gray-900 dark:text-white">{station.platforms.length}</p>
           </div>
-          <div className="bg-white dark:bg-slate-900 p-4 rounded-2xl border border-gray-200 dark:border-slate-800 col-span-2 flex flex-col justify-center">
+          <div className="bg-white dark:bg-slate-900 p-4 rounded-2xl border border-gray-200 dark:border-slate-800 sm:col-span-2 flex flex-col justify-center">
             <p className="text-[9px] text-gray-500 dark:text-slate-500 font-black uppercase tracking-widest mb-1">{t('admin.coordinates')}</p>
             <p className="text-sm font-bold text-gray-500 dark:text-slate-400 truncate">{station.coordinates.lat.toFixed(4)}, {station.coordinates.lng.toFixed(4)}</p>
           </div>
@@ -313,7 +313,7 @@ const AdminPanel: React.FC<AdminPanelProps> = ({ stations, setStations, trains, 
           <p className="text-gray-500 dark:text-slate-400 mt-2 font-medium">{t('admin.modify_params')}</p>
         </div>
         {!managingStationId && (
-          <div className="bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border border-gray-200 dark:border-slate-800 rounded-2xl p-1.5 flex shadow-2xl">
+          <div className="bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border border-gray-200 dark:border-slate-800 rounded-2xl p-1.5 flex flex-wrap gap-2 shadow-2xl">
             {(['STATIONS', 'TRAINS', 'FACILITIES'] as const).map(tab => (
               <button
                 key={tab}
@@ -425,7 +425,7 @@ const AdminPanel: React.FC<AdminPanelProps> = ({ stations, setStations, trains, 
         )}
 
         {!managingStationId && activeTab === 'FACILITIES' && (
-          <div className="p-24 text-center">
+          <div className="p-10 md:p-24 text-center">
             <div className="w-24 h-24 bg-slate-950 border border-slate-800 rounded-3xl flex items-center justify-center mx-auto mb-8 shadow-inner">
               <Plus size={40} className="text-slate-600" />
             </div>

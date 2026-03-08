@@ -302,7 +302,7 @@ const StationMap: React.FC<StationMapProps> = ({ station }) => {
 
             <div className="space-y-6 overflow-y-auto pr-2 custom-scrollbar flex-1">
               {/* Platform Quick Summary */}
-              <div className="grid grid-cols-2 gap-3 mb-2">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-2">
                 <div className={`p-4 rounded-2xl border transition-colors ${platformMetrics[selectedPlatform].hasAlert ? 'bg-rose-500/5 border-rose-500/20' : 'bg-gray-50 dark:bg-slate-950 border-gray-200 dark:border-slate-800'}`}>
                   <p className="text-[9px] font-black text-gray-500 dark:text-slate-500 uppercase tracking-widest mb-1">{t('station_map.safety_status')}</p>
                   <p className={`text-xs font-bold ${platformMetrics[selectedPlatform].hasAlert ? 'text-rose-400' : 'text-emerald-500 dark:text-emerald-400'}`}>
@@ -365,7 +365,7 @@ const StationMap: React.FC<StationMapProps> = ({ station }) => {
               </div>
 
               {/* Status Section */}
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div className="p-4 bg-emerald-500/5 border border-emerald-500/20 rounded-2xl">
                   <p className="text-[9px] font-bold text-emerald-500 uppercase tracking-widest mb-1">{t('station_map.signal_status')}</p>
                   <p className="text-sm font-bold text-gray-900 dark:text-white">{t('station_map.nominal')}</p>

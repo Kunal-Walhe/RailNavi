@@ -82,8 +82,16 @@ const Layout: React.FC<LayoutProps> = ({
         <div className="absolute inset-0 bg-white/50 dark:bg-slate-950/40 backdrop-blur-sm" />
       </div>
 
+      {/* Mobile Sidebar Backdrop */}
+      {isSidebarOpen && (
+        <div
+          className="fixed inset-0 bg-slate-900/50 z-30 md:hidden backdrop-blur-sm"
+          onClick={() => setIsSidebarOpen(false)}
+        />
+      )}
+
       {/* Sidebar */}
-      <aside className={`${isSidebarOpen ? 'w-72' : 'w-20'} bg-white dark:bg-slate-900 border-r border-gray-200 dark:border-slate-800 transition-all duration-300 flex flex-col z-30 shadow-sm`}>
+      <aside className={`${isSidebarOpen ? 'w-72 translate-x-0' : 'w-72 -translate-x-full md:w-20 md:translate-x-0'} fixed md:relative h-full bg-white dark:bg-slate-900 border-r border-gray-200 dark:border-slate-800 transition-all duration-300 flex flex-col z-40 shadow-xl md:shadow-sm`}>
         <div
           onClick={() => onViewChange('home')}
           className="p-4 border-b border-gray-100 dark:border-slate-800 flex items-center gap-3 bg-blue-900 text-white cursor-pointer hover:bg-blue-800 transition-colors"
@@ -151,9 +159,9 @@ const Layout: React.FC<LayoutProps> = ({
       </aside>
 
       {/* Main Content */}
-      <main className="flex-1 flex flex-col h-screen overflow-y-auto relative z-10">
-        <header className="bg-white dark:bg-slate-900 h-14 border-b border-gray-200 dark:border-slate-800 flex items-center justify-between px-6 sticky top-0 z-20 shadow-sm">
-          <div className="flex items-center gap-6">
+      <main className="flex-1 flex flex-col h-screen overflow-y-auto relative z-10 w-full">
+        <header className="bg-white dark:bg-slate-900 h-14 border-b border-gray-200 dark:border-slate-800 flex items-center justify-between px-3 md:px-6 sticky top-0 z-20 shadow-sm">
+          <div className="flex items-center gap-3 md:gap-6">
             <button
               onClick={() => setIsSidebarOpen(!isSidebarOpen)}
               className="p-2 text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white transition-all"
@@ -165,10 +173,10 @@ const Layout: React.FC<LayoutProps> = ({
             <div className="relative">
               <button
                 onClick={() => setIsStationSelectorOpen(!isStationSelectorOpen)}
-                className="flex items-center gap-2 bg-gray-50 dark:bg-slate-800 border border-gray-300 dark:border-slate-700 px-4 py-2 rounded text-gray-900 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-slate-700 transition-all"
+                className="flex items-center gap-2 bg-gray-50 dark:bg-slate-800 border border-gray-300 dark:border-slate-700 px-2 sm:px-4 py-2 rounded text-gray-900 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-slate-700 transition-all"
               >
-                <MapPin size={16} className="text-blue-700" />
-                <span className="text-sm font-bold uppercase tracking-wide">{activeStation.name}</span>
+                <MapPin size={16} className="text-blue-700 shrink-0" />
+                <span className="text-xs sm:text-sm font-bold uppercase tracking-wide truncate max-w-[100px] sm:max-w-[200px]">{activeStation.name}</span>
                 <ChevronDown size={14} className={`text-gray-500 transition-transform duration-200 ${isStationSelectorOpen ? 'rotate-180' : ''}`} />
               </button>
 
@@ -206,8 +214,8 @@ const Layout: React.FC<LayoutProps> = ({
             </div>
           </div>
 
-          <div className="flex items-center gap-6">
-            <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 md:gap-6">
+            <div className="hidden sm:flex items-center gap-2">
               <img src="https://upload.wikimedia.org/wikipedia/en/thumb/4/41/Flag_of_India.svg/1200px-Flag_of_India.svg.png" alt="Flag" className="h-4 shadow-sm border border-gray-200 dark:border-slate-700" />
               <span className="text-xs font-bold text-gray-500 dark:text-gray-400">GOI</span>
             </div>
@@ -233,7 +241,7 @@ const Layout: React.FC<LayoutProps> = ({
           </div>
         </header>
 
-        <div className="p-8 max-w-7xl mx-auto w-full">
+        <div className="p-4 md:p-8 max-w-7xl mx-auto w-full">
           {children}
         </div>
       </main>

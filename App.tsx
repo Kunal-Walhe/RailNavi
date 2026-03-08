@@ -73,8 +73,8 @@ const App: React.FC = () => {
   };
 
   const renderLoginView = () => (
-    <div className="flex items-center justify-center py-20 animate-in fade-in zoom-in-95 duration-700">
-      <div className="w-full max-w-md bg-white dark:bg-slate-900 rounded-lg shadow-xl overflow-hidden p-10 border border-gray-200 dark:border-slate-800">
+    <div className="flex items-center justify-center py-10 sm:py-20 px-4 animate-in fade-in zoom-in-95 duration-700">
+      <div className="w-full max-w-md bg-white dark:bg-slate-900 rounded-lg shadow-xl overflow-hidden p-6 sm:p-10 border border-gray-200 dark:border-slate-800">
         <div className="flex flex-col items-center mb-8">
           <div className="bg-blue-900 p-4 rounded-full text-white mb-4 shadow-lg">
             <ShieldCheck size={32} />

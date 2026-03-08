@@ -59,7 +59,22 @@ const getMockResponse = async (query: string, currentStation: Station): Promise<
         targetStation.platforms.forEach(p => {
           if (p.facilities) {
             p.facilities.forEach(f => {
-              if (lowerQuery.includes(f.name.toLowerCase()) || lowerQuery.includes(f.type.toLowerCase())) {
+              const q = lowerQuery;
+              const t = f.type.toLowerCase();
+              const n = f.name.toLowerCase();
+
+              let isMatch = q.includes(n) || q.includes(t);
+              if (!isMatch) {
+                if (q.includes('waiting') && t.includes('waiting')) isMatch = true;
+                if (q.includes('food') && t.includes('food')) isMatch = true;
+                if (q.includes('restroom') && t.includes('restroom')) isMatch = true;
+                if (q.includes('med') && t.includes('medical')) isMatch = true;
+                if (q.includes('shop') && t.includes('shop')) isMatch = true;
+                if (q.includes('atm') && t.includes('atm')) isMatch = true;
+                if (q.includes('cloak') && t.includes('cloak')) isMatch = true;
+              }
+
+              if (isMatch) {
                 facilities.push(`- **${f.name}** (${f.type}) on Platform ${p.number}, ${f.locationDetails}`);
               }
             });

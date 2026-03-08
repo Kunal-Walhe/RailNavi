@@ -1,0 +1,7 @@
+{
+  "name": "RailNavi",
+  "description": "A comprehensive digital navigation and information system for railway stations, featuring real-time schedules, facility locators, and administrative controls.",
+  "requestFramePermissions": [
+    "geolocation"
+  ]
+}

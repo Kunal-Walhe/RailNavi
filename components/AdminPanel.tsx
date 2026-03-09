@@ -241,7 +241,7 @@ const AdminPanel: React.FC<AdminPanelProps> = ({ stations, setStations, trains, 
             <Plus size={18} /> Add Platform
           </button>
         </div>
-        <div className="p-8 space-y-8">
+        <div className="p-8 space-y-8 max-h-[600px] overflow-y-auto custom-scrollbar">
           {station.platforms.length === 0 ? (
             <div className="text-center py-12 text-gray-500 dark:text-slate-500 font-bold uppercase tracking-widest text-sm bg-gray-50 dark:bg-slate-950/30 rounded-3xl border border-dashed border-gray-300 dark:border-slate-800">
               No Platforms Added
@@ -341,7 +341,7 @@ const AdminPanel: React.FC<AdminPanelProps> = ({ stations, setStations, trains, 
                 <Plus size={18} /> Provision Station
               </button>
             </div>
-            <div className="p-8 grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="p-8 grid grid-cols-1 md:grid-cols-2 gap-8 max-h-[600px] overflow-y-auto custom-scrollbar">
               {stations.map(renderStationCard)}
             </div>
           </div>
@@ -357,9 +357,9 @@ const AdminPanel: React.FC<AdminPanelProps> = ({ stations, setStations, trains, 
                 <PlusCircle size={18} /> {t('admin.add_movement')}
               </button>
             </div>
-            <div className="overflow-x-auto">
-              <table className="w-full text-left">
-                <thead className="bg-gray-100 dark:bg-slate-950/50 text-gray-500 dark:text-slate-500 text-[10px] font-black uppercase tracking-[0.2em] border-b border-gray-200 dark:border-slate-800">
+            <div className="overflow-x-auto max-h-[600px] overflow-y-auto custom-scrollbar">
+              <table className="w-full text-left relative">
+                <thead className="bg-gray-100 dark:bg-slate-950/50 text-gray-500 dark:text-slate-500 text-[10px] font-black uppercase tracking-[0.2em] shadow-sm border-b border-gray-200 dark:border-slate-800 sticky top-0 z-10">
                   <tr>
                     <th className="px-8 py-5">{t('admin.vehicle_id')}</th>
                     <th className="px-8 py-5">{t('admin.track_assign')}</th>

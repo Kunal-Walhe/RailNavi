@@ -181,14 +181,14 @@ const StationMap: React.FC<StationMapProps> = ({ station }) => {
               </div>
             </div>
 
-            <div className="relative w-full h-[400px] bg-gray-50 dark:bg-slate-950 rounded-3xl border border-gray-200 dark:border-slate-800 flex flex-col items-center justify-center p-8 gap-4 overflow-hidden">
+            <div className="relative w-full h-[400px] bg-gray-50 dark:bg-slate-950 rounded-3xl border border-gray-200 dark:border-slate-800 flex flex-col p-8 gap-4 overflow-hidden">
               <div className="absolute inset-0 opacity-[0.03] pointer-events-none overflow-hidden">
                 {Array.from({ length: 20 }).map((_, i) => (
                   <div key={i} className="h-px w-full bg-black dark:bg-slate-100 mb-6" />
                 ))}
               </div>
 
-              <div className="relative z-10 w-full flex flex-col items-center gap-3">
+              <div className="relative z-10 w-full h-full flex flex-col items-center gap-3 overflow-y-auto custom-scrollbar pr-2">
                 {platformNumbers.map((num) => {
                   const metrics = platformMetrics[num];
                   const isSelected = selectedPlatform === num;
@@ -197,7 +197,7 @@ const StationMap: React.FC<StationMapProps> = ({ station }) => {
                     <button
                       key={num}
                       onClick={() => setSelectedPlatform(num)}
-                      className={`relative w-full max-w-2xl h-12 rounded-xl transition-all duration-300 flex items-center justify-between px-6 border group overflow-hidden ${isSelected
+                      className={`shrink-0 relative w-full max-w-2xl h-12 rounded-xl transition-all duration-300 flex items-center justify-between px-6 border group overflow-hidden ${isSelected
                         ? 'bg-blue-600 border-blue-500 text-white shadow-[0_0_25px_rgba(37,99,235,0.4)] scale-[1.03] z-20'
                         : 'bg-white dark:bg-slate-900 border-gray-200 dark:border-slate-800 text-gray-500 dark:text-slate-500 hover:border-gray-300 dark:hover:border-slate-600 hover:bg-gray-50 dark:hover:bg-slate-800'
                         }`}

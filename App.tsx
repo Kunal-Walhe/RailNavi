@@ -24,7 +24,11 @@ const App: React.FC = () => {
   const [user, setUser] = useState<User>(GUEST_USER);
   const [stations, setStations] = useState<Station[]>(MOCK_STATIONS);
   const [trains, setTrains] = useState<Train[]>(MOCK_TRAINS);
-  const [activeStation, setActiveStation] = useState<Station>(stations[0]);
+  const [activeStationId, setActiveStationId] = useState<string>(stations[0]?.id || '');
+
+  // Derive activeStation from stations to ensure updates from AdminPanel reflect everywhere
+  const activeStation = stations.find(s => s.id === activeStationId) || stations[0] || {} as Station;
+
   const [currentView, setCurrentView] = useState('home');
   const [isDark, setIsDark] = useState(true);
 
@@ -164,7 +168,7 @@ const App: React.FC = () => {
       user={user}
       stations={stations}
       activeStation={activeStation}
-      onStationChange={setActiveStation}
+      onStationChange={(s) => setActiveStationId(s.id)}
       onLogout={handleLogout}
       currentView={currentView}
       onViewChange={setCurrentView}

@@ -63,7 +63,7 @@ const StationMap: React.FC<StationMapProps> = ({ station }) => {
   const [facilityStatuses, setFacilityStatuses] = useState<Record<string, FacilityStatus>>({});
 
   const selectedPlatformData = useMemo(() => {
-    return station.platforms.find(p => p.number === selectedPlatform) || station.platforms[0];
+    return station.platforms.find(p => p.number === selectedPlatform) || station.platforms[0] || { number: 1, facilities: [] };
   }, [station, selectedPlatform]);
 
   const platformNumbers = useMemo(() => {

@@ -94,3 +94,6 @@ Contributions are welcome! Please feel free to submit a customizable Pull Reques
 ---
 
 *RailNavi - Simplifying Rail Travel with Intelligence.*
+
+ReadMe for coderabbit review
+

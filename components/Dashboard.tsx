@@ -3,7 +3,8 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Station, Train } from '../types';
 // Fixed error: Added Navigation2 to the lucide-react import list
-import { Train as TrainIcon, Map, Users, Clock, AlertCircle, ArrowUpRight, Navigation2 } from 'lucide-react';
+import { Train as TrainIcon, Map, Users, Clock, AlertCircle, ArrowUpRight, Navigation2, Cloud, Droplets, Wind } from 'lucide-react';
+import { fetchWeather } from '../services/weatherService';
 
 interface DashboardProps {
   activeStation: Station;
@@ -13,6 +14,17 @@ interface DashboardProps {
 
 const Dashboard: React.FC<DashboardProps> = ({ activeStation, trains, onNavigate }) => {
   const { t } = useTranslation();
+  const [weather, setWeather] = React.useState<any>(null);
+
+  React.useEffect(() => {
+    const loadWeather = async () => {
+      if (activeStation && activeStation.city) {
+        const data = await fetchWeather(activeStation.city);
+        if (data) setWeather(data);
+      }
+    };
+    loadWeather();
+  }, [activeStation]);
 
   return (
     <div className="space-y-8 animate-in fade-in slide-in-from-bottom-3 duration-700">
@@ -23,7 +35,18 @@ const Dashboard: React.FC<DashboardProps> = ({ activeStation, trains, onNavigate
           </h1>
           <p className="text-gray-500 dark:text-gray-400 mt-1 text-sm">{t('dashboard.official_dashboard_for')} {activeStation.name}</p>
         </div>
-        <div className="flex gap-3">
+        <div className="flex flex-wrap gap-3">
+          {weather && (
+            <div className="bg-white dark:bg-slate-800 border border-gray-300 dark:border-slate-700 text-gray-700 dark:text-gray-300 px-4 py-2 rounded shadow-sm text-sm font-semibold flex items-center gap-3">
+              <span className="flex items-center gap-1.5 text-blue-500">
+                <Cloud size={16} /> {Math.round(weather.main.temp)}°C
+              </span>
+              <span className="w-px h-4 bg-gray-300 dark:bg-slate-600 block"></span>
+              <span className="flex items-center gap-1 text-gray-400 capitalize text-xs">
+                {weather.weather[0].description}
+              </span>
+            </div>
+          )}
           <button className="bg-white dark:bg-slate-800 hover:bg-gray-50 dark:hover:bg-slate-700 border border-gray-300 dark:border-slate-700 text-gray-700 dark:text-gray-300 px-4 py-2 rounded shadow-sm text-sm font-semibold transition-all flex items-center gap-2">
             <Clock size={16} />
             {new Date().toLocaleDateString('en-IN', { weekday: 'short', day: '2-digit', month: 'short' })}

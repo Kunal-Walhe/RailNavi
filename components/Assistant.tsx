@@ -18,14 +18,23 @@ interface AssistantProps {
 
 const Assistant: React.FC<AssistantProps> = ({ activeStation }) => {
   const { t } = useTranslation();
-  const [messages, setMessages] = useState<Message[]>([
-    { id: '1', role: 'assistant', content: t('assistant.greeting') }
-  ]);
+  const [messages, setMessages] = useState<Message[]>(() => {
+    const saved = sessionStorage.getItem('chatMessages');
+    if (saved) {
+      try {
+        return JSON.parse(saved);
+      } catch (e) {
+        // Ignore parse error
+      }
+    }
+    return [{ id: '1', role: 'assistant', content: t('assistant.greeting') }];
+  });
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    sessionStorage.setItem('chatMessages', JSON.stringify(messages));
     if (scrollRef.current) {
       scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
     }

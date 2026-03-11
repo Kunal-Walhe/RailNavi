@@ -21,8 +21,10 @@ import {
   Armchair,
   Luggage,
   TrendingUp,
-  AlertCircle
+  AlertCircle,
+  Cloud
 } from 'lucide-react';
+import { fetchWeather } from '../services/weatherService';
 
 // Refined icon mapping for more appropriate and distinct visual representation
 const serviceIcons: Record<string, React.ElementType> = {
@@ -58,6 +60,7 @@ const StationMap: React.FC<StationMapProps> = ({ station }) => {
   const { t } = useTranslation();
   const [selectedPlatform, setSelectedPlatform] = useState<number>(1);
   const [isMapExpanded, setIsMapExpanded] = useState(false);
+  const [weather, setWeather] = useState<any>(null);
 
   // Real-time status state mapping facility IDs to their current status
   const [facilityStatuses, setFacilityStatuses] = useState<Record<string, FacilityStatus>>({});
@@ -102,7 +105,6 @@ const StationMap: React.FC<StationMapProps> = ({ station }) => {
     });
     setFacilityStatuses(initialStatuses);
 
-    // Simulation loop to change statuses periodically
     const interval = setInterval(() => {
       setFacilityStatuses(prev => {
         const next = { ...prev };
@@ -128,6 +130,16 @@ const StationMap: React.FC<StationMapProps> = ({ station }) => {
     return () => clearInterval(interval);
   }, [station]);
 
+  useEffect(() => {
+    const loadWeather = async () => {
+      if (station && station.city) {
+        const data = await fetchWeather(station.city);
+        if (data) setWeather(data);
+      }
+    };
+    loadWeather();
+  }, [station]);
+
   return (
     <div className="space-y-10 animate-in fade-in duration-700">
       {/* Header Section */}
@@ -146,7 +158,22 @@ const StationMap: React.FC<StationMapProps> = ({ station }) => {
             {t('station_map.select_platform_instruction')}
           </p>
         </div>
-        <div className="flex gap-3">
+        <div className="flex flex-wrap gap-3">
+          {weather && (
+            <div className="bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border border-gray-200 dark:border-slate-800 rounded-2xl p-4 flex items-center gap-4 shadow-xl">
+              <div className="bg-blue-500/10 p-2.5 rounded-xl border border-blue-500/20">
+                <Cloud size={20} className="text-blue-500 dark:text-blue-400" />
+              </div>
+              <div>
+                <p className="text-[10px] font-bold text-gray-500 dark:text-slate-500 uppercase tracking-widest">{t('station_map.weather') || 'Local Weather'}</p>
+                <div className="flex items-center gap-2">
+                  <p className="text-sm font-bold text-gray-900 dark:text-white">{Math.round(weather.main.temp)}°C</p>
+                  <span className="text-[10px] text-gray-500 capitalize">({weather.weather[0].description})</span>
+                </div>
+              </div>
+            </div>
+          )}
+
           <div className="bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border border-gray-200 dark:border-slate-800 rounded-2xl p-4 flex items-center gap-4 shadow-xl">
             <div className="bg-emerald-500/10 p-2.5 rounded-xl border border-emerald-500/20">
               <Activity size={20} className="text-emerald-500 dark:text-emerald-400" />

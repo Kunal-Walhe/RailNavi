@@ -2,7 +2,8 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Station, Train } from '../types';
-import { Search, RefreshCw, Clock, ArrowRight, Share2, Info, MapPin, Navigation } from 'lucide-react';
+import { Search, RefreshCw, Clock, ArrowRight, Share2, Info, Navigation, Activity } from 'lucide-react';
+import { fetchTrainSchedule } from '../services/railApiService';
 
 interface ScheduleProps {
   activeStation: Station;
@@ -13,6 +14,32 @@ const Schedule: React.FC<ScheduleProps> = ({ activeStation, trains }) => {
   const { t } = useTranslation();
   const [isRefreshing, setIsRefreshing] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
+  
+  const [expandedTrain, setExpandedTrain] = useState<string | null>(null);
+  const [trainRouteData, setTrainRouteData] = useState<any[]>([]);
+  const [isLoadingRoute, setIsLoadingRoute] = useState(false);
+
+  const handleTrainClick = async (trainNumber: string) => {
+    if (expandedTrain === trainNumber) {
+      setExpandedTrain(null);
+      return;
+    }
+    setExpandedTrain(trainNumber);
+    setIsLoadingRoute(true);
+    setTrainRouteData([]);
+    try {
+      const response = await fetchTrainSchedule(trainNumber);
+      if (response && response.Status === 'SUCCESS' && Array.isArray(response.Route)) {
+        setTrainRouteData(response.Route);
+      } else {
+        setTrainRouteData([]);
+      }
+    } catch (error) {
+      console.error('Error fetching route data', error);
+      setTrainRouteData([]);
+    }
+    setIsLoadingRoute(false);
+  };
 
   const refreshData = () => {
     setIsRefreshing(true);
@@ -59,11 +86,12 @@ const Schedule: React.FC<ScheduleProps> = ({ activeStation, trains }) => {
 
       <div className="grid grid-cols-1 gap-4">
         {filteredTrains.map((train) => (
-          <div key={train.id} className="bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-800 rounded-lg shadow-sm hover:shadow-lg hover:border-blue-300 dark:hover:border-blue-700 hover:scale-[1.01] transition-all duration-300 overflow-hidden flex flex-col md:flex-row group cursor-pointer relative">
-            <div className={`w-2 md:w-2 ${train.status === 'ON_TIME' ? 'bg-emerald-500' : 'bg-red-500'}`} />
+          <div key={train.id} className="bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-800 rounded-lg shadow-sm hover:shadow-lg hover:border-blue-300 dark:hover:border-blue-700 transition-all duration-300 overflow-hidden flex flex-col group relative">
+            <div className="flex flex-col md:flex-row relative cursor-pointer" onClick={() => handleTrainClick(train.number)}>
+              <div className={`absolute left-0 top-0 bottom-0 w-2 md:w-2 ${train.status === 'ON_TIME' ? 'bg-emerald-500' : 'bg-red-500'}`} />
 
-            {/* Info Section */}
-            <div className="flex-1 p-5 flex flex-col md:flex-row items-start md:items-center gap-6">
+              {/* Info Section */}
+              <div className="flex-1 p-5 pl-6 md:pl-8 flex flex-col md:flex-row items-start md:items-center gap-6">
               <div className="w-full md:w-56 shrink-0">
                 <div className="flex items-center gap-2 mb-1">
                   <span className="px-2 py-0.5 bg-gray-100 dark:bg-slate-800 text-gray-600 dark:text-gray-400 border border-gray-200 dark:border-slate-700 rounded text-[10px] font-bold uppercase tracking-wider">{train.number}</span>
@@ -113,7 +141,7 @@ const Schedule: React.FC<ScheduleProps> = ({ activeStation, trains }) => {
                   </p>
                 </div>
                 <div className="flex gap-2">
-                  <button className="p-2 text-gray-400 hover:text-blue-700 dark:hover:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/20 rounded transition-all">
+                  <button onClick={(e) => e.stopPropagation()} className="p-2 text-gray-400 hover:text-blue-700 dark:hover:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/20 rounded transition-all">
                     <Share2 size={16} />
                   </button>
                   <button className="p-2 text-gray-400 hover:text-blue-700 dark:hover:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/20 rounded transition-all">
@@ -122,6 +150,41 @@ const Schedule: React.FC<ScheduleProps> = ({ activeStation, trains }) => {
                 </div>
               </div>
             </div>
+          </div>
+
+            {/* Expanded Route View */}
+            {expandedTrain === train.number && (
+              <div className="p-4 md:px-8 border-t border-gray-100 dark:border-slate-800 bg-gray-50 dark:bg-slate-950/50">
+                <h4 className="text-xs font-bold text-gray-700 dark:text-gray-300 uppercase tracking-wider mb-4 flex items-center gap-2">
+                  <Activity size={14} className="text-blue-500" /> Full Train Schedule
+                </h4>
+                {isLoadingRoute ? (
+                  <div className="flex items-center justify-center p-6 text-sm font-bold text-gray-400 uppercase tracking-widest animate-pulse">
+                    Fetching Route...
+                  </div>
+                ) : trainRouteData.length > 0 ? (
+                  <div className="space-y-2 max-h-60 overflow-y-auto custom-scrollbar pr-2">
+                    {trainRouteData.map((stop, idx) => (
+                      <div key={idx} className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-3 bg-white dark:bg-slate-900 rounded-lg border border-gray-200 dark:border-slate-800 shadow-sm">
+                        <div>
+                          <span className="text-[10px] font-black text-blue-700 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/30 px-2 py-1 rounded inline-block mb-1 sm:mb-0 sm:mr-3 border border-blue-200 dark:border-blue-800">{stop.StationCode}</span>
+                          <span className="text-xs font-bold text-gray-800 dark:text-gray-200">{stop.StationName}</span>
+                        </div>
+                        <div className="flex items-center gap-4 text-[10px] font-bold text-gray-500 uppercase tracking-wider">
+                          <span className="flex items-center gap-1.5 bg-gray-50 dark:bg-slate-800 px-2 py-1.5 rounded text-gray-700 dark:text-gray-300 border border-gray-200 dark:border-slate-700">Arr <span className="text-gray-900 dark:text-white">{stop.ArrivalTime}</span></span>
+                          <span className="flex items-center gap-1.5 bg-gray-50 dark:bg-slate-800 px-2 py-1.5 rounded text-gray-700 dark:text-gray-300 border border-gray-200 dark:border-slate-700">Dep <span className="text-gray-900 dark:text-white">{stop.DepartureTime}</span></span>
+                          {stop.Day > 0 && <span className="text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-900/20 px-1.5 py-0.5 rounded ml-1">Day {stop.Day}</span>}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <div className="p-4 text-center rounded-lg border border-dashed border-gray-300 dark:border-slate-700">
+                    <p className="text-xs font-bold text-gray-500 dark:text-slate-400 uppercase tracking-widest">Route Data Unavailable</p>
+                  </div>
+                )}
+              </div>
+            )}
           </div>
         ))}
       </div>

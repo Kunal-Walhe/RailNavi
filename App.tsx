@@ -12,6 +12,7 @@ import Home from './components/Home';
 import { MOCK_USERS, MOCK_STATIONS, MOCK_TRAINS } from './mockData';
 import { User, Station, Train } from './types';
 import { Train as TrainIcon, Lock, Mail, ArrowRight, ShieldCheck } from 'lucide-react';
+import { fetchLiveStation } from './services/railApiService';
 
 const GUEST_USER: User = {
   id: 'guest',
@@ -20,11 +21,47 @@ const GUEST_USER: User = {
   email: 'guest@railnavi.com'
 };
 
+const parseTime = (timeStr: string): number => {
+  if (!timeStr || timeStr === '--:--') return Infinity;
+  const match = timeStr.match(/(\d+):(\d+)\s*(AM|PM)?/i);
+  if (!match) return Infinity;
+  let hours = parseInt(match[1], 10);
+  const minutes = parseInt(match[2], 10);
+  const period = match[3]?.toUpperCase();
+  if (period === 'PM' && hours !== 12) hours += 12;
+  if (period === 'AM' && hours === 12) hours = 0;
+  return hours * 60 + minutes;
+};
+
+const sortTrains = (trainList: Train[]) => {
+  const now = new Date();
+  const currentMinutes = now.getHours() * 60 + now.getMinutes();
+  
+  return [...trainList].sort((a, b) => {
+    let diffA = parseTime(a.arrivalTime) - currentMinutes;
+    if (diffA < 0) diffA += 24 * 60;
+    
+    let diffB = parseTime(b.arrivalTime) - currentMinutes;
+    if (diffB < 0) diffB += 24 * 60;
+    
+    return diffA - diffB;
+  });
+};
+
 const App: React.FC = () => {
   const [user, setUser] = useState<User>(GUEST_USER);
   const [stations, setStations] = useState<Station[]>(MOCK_STATIONS);
-  const [trains, setTrains] = useState<Train[]>(MOCK_TRAINS);
+  const [trains, setTrains] = useState<Train[]>([]);
   const [activeStationId, setActiveStationId] = useState<string>(stations[0]?.id || '');
+
+  // Add a dedicated effect to initialize and occasionally re-sort mock data when API falls back
+  React.useEffect(() => {
+    setTrains(sortTrains(MOCK_TRAINS));
+    const timer = setInterval(() => {
+      setTrains(prev => sortTrains(prev));
+    }, 60000);
+    return () => clearInterval(timer);
+  }, []);
 
   // Derive activeStation from stations to ensure updates from AdminPanel reflect everywhere
   const activeStation = stations.find(s => s.id === activeStationId) || stations[0] || {} as Station;
@@ -36,6 +73,43 @@ const App: React.FC = () => {
   const [loginPassword, setLoginPassword] = useState('');
   const [isLoggingIn, setIsLoggingIn] = useState(false);
   const [loginError, setLoginError] = useState('');
+
+  // Fetch live trains when active station changes
+  React.useEffect(() => {
+    const loadLiveTrains = async () => {
+      try {
+        if (!activeStation.code) return;
+        const response = await fetchLiveStation(activeStation.code, 4);
+        console.log("Live Station API Response:", response);
+        
+        // Map native API response to our Train[] structure if it contains Trains array
+        if (response && response.Status === 'SUCCESS' && Array.isArray(response.Trains)) {
+          const liveTrains: Train[] = response.Trains.map((apiTrain: any) => {
+            const delayArr = parseInt(apiTrain.DelayInArrival || '0', 10);
+            return {
+              id: `api_${apiTrain.TrainNo}_${Date.now()}`,
+              number: apiTrain.TrainNo || 'N/A',
+              name: apiTrain.TrainName || 'Unknown Train',
+              arrivalTime: apiTrain.ExpectedArrival || '--:--',
+              departureTime: apiTrain.ExpectedDeparture || '--:--',
+              platform: parseInt(apiTrain.Platform || '1', 10),
+              status: delayArr > 0 ? 'DELAYED' : 'ON_TIME',
+              delayInMinutes: delayArr > 0 ? delayArr : 0
+            };
+          });
+          if (liveTrains.length > 0) {
+            setTrains(sortTrains(liveTrains));
+          }
+        }
+      } catch (err) {
+        console.error("Error loading live trains, falling back to mock", err);
+      }
+    };
+
+    loadLiveTrains();
+    const intervalId = setInterval(loadLiveTrains, 60000); // Update every minute
+    return () => clearInterval(intervalId);
+  }, [activeStation.code]);
 
   // Theme Toggle Effect
   React.useEffect(() => {

@@ -5,6 +5,7 @@
 ## 🚀 Key Features
 
 ### 🌍 For Passengers
+
 - **Real-Time Dashboard & Schedule**: Live status of active trains, platform utilization, and real-time train schedules fetched directly using the **Indian Rail API**.
 - **Live Weather Updates**: Integrated **OpenWeather API** for real-time weather conditions at the selected destination and station.
 - **Smart Station Map & Facility Locator**: Interactive spatial view to quickly find essential amenities like ATMs, food courts, waiting halls, and restrooms.
@@ -13,11 +14,13 @@
 - **Multi-Language Support**: Seamlessly switch between **English** and **Hindi** for better accessibility.
 
 ### 🛡️ For Administrators (Internal Staff)
+
 - **Extensive Admin Panel**: Secure login for staff users (`ADMIN` role).
 - **Global Data Management**: Edit station and schedule information dynamically. Add new platforms, update train details, and have the changes reflect globally across all user dashboards instantly.
 - **Scrollable & Functional Interface**: A newly enhanced, fully scrollable admin UI designed to manage complex platform and station entities cleanly.
 
 ### 🎨 UI/UX Highlights
+
 - **Dark Mode by Default**: A sleek, modern dark theme optimized for readability.
 - **Independent Identity**: Clean, generic branding without official government affiliations.
 - **Interactive Elements**: Smooth animations and responsive grid structures powered by modern CSS and React best practices.
@@ -34,31 +37,36 @@
 
 ## 📦 Installation & Setup
 
-1.  **Clone the repository**
+1. **Clone the repository**
+
     ```bash
     git clone https://github.com/your-username/railnavi.git
     cd railnavi
     ```
 
-2.  **Environment Variables**
+2. **Environment Variables**
     Create a `.env.local` file in the root directory and add your API keys:
+
     ```env
     VITE_GEMINI_API_KEY=your_gemini_api_key
     VITE_RAIL_API_KEY=your_indian_rail_api_key
     # Add any other required keys (e.g., OpenWeather)
     ```
 
-3.  **Install dependencies**
+3. **Install dependencies**
+
     ```bash
     npm install
     ```
 
-4.  **Start the development server**
+4. **Start the development server**
+
     ```bash
     npm run dev
     ```
 
-5.  **Build for production**
+5. **Build for production**
+
     ```bash
     npm run build
     ```
@@ -76,7 +84,7 @@ To access the **Staff Dashboard**, use the following default credentials in the 
 
 ## 📂 Project Structure
 
-```
+```text
 railnavi/
 ├── src/
 │   ├── components/       # UI Components (Dashboard, AdminPanel, Assistant, Layout, etc.)
@@ -95,11 +103,11 @@ railnavi/
 
 Contributions are welcome! Please feel free to submit a customizable Pull Request.
 
-1.  Fork the project
-2.  Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3.  Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4.  Push to the branch (`git push origin feature/AmazingFeature`)
-5.  Open a Pull Request
+1. Fork the project
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
 ---
 

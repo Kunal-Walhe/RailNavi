@@ -15,7 +15,6 @@ import {
   LogIn,
   Map as MapIcon,
   ChevronDown,
-  Bell,
   Sun,
   Moon
 } from 'lucide-react';
@@ -97,12 +96,12 @@ const Layout: React.FC<LayoutProps> = ({
           className="p-4 border-b border-gray-100 dark:border-slate-800 flex items-center gap-3 bg-blue-900 text-white cursor-pointer hover:bg-blue-800 transition-colors"
         >
           <div className="bg-white/10 p-2 rounded shrink-0">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Emblem_of_India.svg/200px-Emblem_of_India.svg.png" alt="Emblem" className="w-6 h-6 object-contain grayscale brightness-200 invert" />
+            <img src="/emblem.png" alt="Emblem" className="w-8 h-8 object-contain" />
           </div>
           {isSidebarOpen && (
             <div className="flex flex-col">
-              <span className="text-xs font-bold uppercase tracking-wider text-blue-200">{t('common.ministry_of_railways')}</span>
-              <span className="text-lg font-bold tracking-tight">{t('common.railnavi_portal')}</span>
+              <span className="text-[10px] font-black uppercase tracking-widest text-blue-300/80 leading-none mb-1">{t('common.ministry_of_railways')}</span>
+              <span className="text-xl font-black tracking-tight text-white leading-tight">{t('common.railnavi_portal')}</span>
             </div>
           )}
         </div>
@@ -216,7 +215,7 @@ const Layout: React.FC<LayoutProps> = ({
 
           <div className="flex items-center gap-2 md:gap-6">
             <div className="hidden sm:flex items-center gap-2">
-              <img src="https://upload.wikimedia.org/wikipedia/en/thumb/4/41/Flag_of_India.svg/1200px-Flag_of_India.svg.png" alt="Flag" className="h-4 shadow-sm border border-gray-200 dark:border-slate-700" />
+              <img src="/flag.png" alt="Flag" className="h-5 shadow-sm rounded-sm" />
               <span className="text-xs font-bold text-gray-500 dark:text-gray-400">GOI</span>
             </div>
 
@@ -232,11 +231,6 @@ const Layout: React.FC<LayoutProps> = ({
               className="p-2 text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-slate-800 rounded-lg transition-colors"
             >
               {isDark ? <Sun size={20} /> : <Moon size={20} />}
-            </button>
-
-            <button className="p-2 text-gray-500 dark:text-gray-400 hover:text-blue-700 dark:hover:text-blue-400 relative">
-              <Bell size={20} />
-              <span className="absolute top-2 right-2 w-2 h-2 bg-red-600 rounded-full border border-white dark:border-slate-900"></span>
             </button>
           </div>
         </header>

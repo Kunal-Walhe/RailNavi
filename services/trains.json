@@ -1,0 +1,629 @@
+[
+  {
+    "trainNo": "22656",
+    "data": {
+      "train_no": "22656",
+      "train_name": "NZM ERS SF EXP",
+      "from_stn_name": "Hazrat Nizamuddin",
+      "from_stn_code": "NZM",
+      "to_stn_name": "Ernakulam Jn",
+      "to_stn_code": "ERS",
+      "from_time": "05.00",
+      "to_time": "00.15",
+      "travel_time": "43.15",
+      "running_days": "0000100",
+      "type": "SUPERFAST",
+      "train_id": "694",
+      "distance_from_to": "2943",
+      "average_speed": "68"
+    }
+  },
+  {
+    "trainNo": "22654",
+    "data": {
+      "train_no": "22654",
+      "train_name": "NZM TVC SF EXP",
+      "from_stn_name": "Hazrat Nizamuddin",
+      "from_stn_code": "NZM",
+      "to_stn_name": "Thiruvananthapuram Central",
+      "to_stn_code": "TVC",
+      "from_time": "05.00",
+      "to_time": "04.45",
+      "travel_time": "47.45",
+      "running_days": "1000000",
+      "type": "SUPERFAST",
+      "train_id": "729",
+      "distance_from_to": "3163",
+      "average_speed": "66"
+    }
+  },
+  {
+    "trainNo": "11058",
+    "data": {
+      "train_no": "11058",
+      "train_name": "ASR CSMT EXP",
+      "from_stn_name": "Amritsar Jn",
+      "from_stn_code": "ASR",
+      "to_stn_name": "C Shivaji Maharaj T",
+      "to_stn_code": "CSMT",
+      "from_time": "08.50",
+      "to_time": "00.05",
+      "travel_time": "39.15",
+      "running_days": "1111111",
+      "type": "MAIL_EXPRESS",
+      "train_id": "730",
+      "distance_from_to": "2046",
+      "average_speed": "52"
+    }
+  },
+  {
+    "trainNo": "12138",
+    "data": {
+      "train_no": "12138",
+      "train_name": "PUNJAB MAIL",
+      "from_stn_name": "Firozpur Cantt Jn",
+      "from_stn_code": "FZR",
+      "to_stn_name": "C Shivaji Maharaj T",
+      "to_stn_code": "CSMT",
+      "from_time": "21.50",
+      "to_time": "07.35",
+      "travel_time": "33.45",
+      "running_days": "1111111",
+      "type": "SUPERFAST",
+      "train_id": "1614",
+      "distance_from_to": "1930",
+      "average_speed": "57"
+    }
+  },
+  {
+    "trainNo": "12432",
+    "data": {
+      "train_no": "12432",
+      "train_name": "TVC RAJDHANI",
+      "from_stn_name": "Hazrat Nizamuddin",
+      "from_stn_code": "NZM",
+      "to_stn_name": "Thiruvananthapuram Central",
+      "to_stn_code": "TVC",
+      "from_time": "06.16",
+      "to_time": "23.35",
+      "travel_time": "41.19",
+      "running_days": "0110001",
+      "type": "RAJDHANI",
+      "train_id": "2019",
+      "distance_from_to": "3149",
+      "average_speed": "76"
+    }
+  },
+  {
+    "trainNo": "12450",
+    "data": {
+      "train_no": "12450",
+      "train_name": "GOA SMPRK KRANT",
+      "from_stn_name": "Chandigarh",
+      "from_stn_code": "CDG",
+      "to_stn_name": "Madgaon",
+      "to_stn_code": "MAO",
+      "from_time": "02.17",
+      "to_time": "11.30",
+      "travel_time": "33.13",
+      "running_days": "1000010",
+      "type": "SUPERFAST",
+      "train_id": "2052",
+      "distance_from_to": "2367",
+      "average_speed": "71"
+    }
+  },
+  {
+    "trainNo": "12472",
+    "data": {
+      "train_no": "12472",
+      "train_name": "SWARAJ EXPRESS",
+      "from_stn_name": "Shmata Vd Katra",
+      "from_stn_code": "SVDK",
+      "to_stn_name": "Bandra Terminus",
+      "to_stn_code": "BDTS",
+      "from_time": "09.40",
+      "to_time": "16.10",
+      "travel_time": "30.30",
+      "running_days": "0110110",
+      "type": "SUPERFAST",
+      "train_id": "2084",
+      "distance_from_to": "2028",
+      "average_speed": "66"
+    }
+  },
+  {
+    "trainNo": "12484",
+    "data": {
+      "train_no": "12484",
+      "train_name": "ASR KCVL SF EXP",
+      "from_stn_name": "Amritsar Jn",
+      "from_stn_code": "ASR",
+      "to_stn_name": "Thiruvananthapuram North",
+      "to_stn_code": "TVCN",
+      "from_time": "05.55",
+      "to_time": "12.30",
+      "travel_time": "54.35",
+      "running_days": "0000001",
+      "type": "SUPERFAST",
+      "train_id": "2100",
+      "distance_from_to": "3597",
+      "average_speed": "66"
+    }
+  },
+  {
+    "trainNo": "22660",
+    "data": {
+      "train_no": "22660",
+      "train_name": "YNRK TVCN EXP",
+      "from_stn_name": "Yog N Rishikesh",
+      "from_stn_code": "YNRK",
+      "to_stn_name": "Thiruvananthapuram North",
+      "to_stn_code": "TVCN",
+      "from_time": "06.15",
+      "to_time": "12.30",
+      "travel_time": "54.15",
+      "running_days": "1000000",
+      "type": "SUPERFAST",
+      "train_id": "2119",
+      "distance_from_to": "3411",
+      "average_speed": "63"
+    }
+  },
+  {
+    "trainNo": "12618",
+    "data": {
+      "train_no": "12618",
+      "train_name": "MNGLA LKSDP EXP",
+      "from_stn_name": "Hazrat Nizamuddin",
+      "from_stn_code": "NZM",
+      "to_stn_name": "Ernakulam Jn",
+      "to_stn_code": "ERS",
+      "from_time": "05.35",
+      "to_time": "07.30",
+      "travel_time": "49.55",
+      "running_days": "1111111",
+      "type": "SUPERFAST",
+      "train_id": "2226",
+      "distance_from_to": "3066",
+      "average_speed": "61"
+    }
+  },
+  {
+    "trainNo": "12904",
+    "data": {
+      "train_no": "12904",
+      "train_name": "GOLDEN TEMPLE M",
+      "from_stn_name": "Amritsar Jn",
+      "from_stn_code": "ASR",
+      "to_stn_name": "Bandra Terminus",
+      "to_stn_code": "BDTS",
+      "from_time": "18.55",
+      "to_time": "23.55",
+      "travel_time": "29.00",
+      "running_days": "1111111",
+      "type": "SUPERFAST",
+      "train_id": "2582",
+      "distance_from_to": "1880",
+      "average_speed": "65"
+    }
+  },
+  {
+    "trainNo": "12908",
+    "data": {
+      "train_no": "12908",
+      "train_name": "MHRST SMPRK K EX",
+      "from_stn_name": "Hazrat Nizamuddin",
+      "from_stn_code": "NZM",
+      "to_stn_name": "Bandra Terminus",
+      "to_stn_code": "BDTS",
+      "from_time": "16.30",
+      "to_time": "09.15",
+      "travel_time": "16.45",
+      "running_days": "1001000",
+      "type": "SUPERFAST",
+      "train_id": "2586",
+      "distance_from_to": "1366",
+      "average_speed": "82"
+    }
+  },
+  {
+    "trainNo": "12910",
+    "data": {
+      "train_no": "12910",
+      "train_name": "BDTS GARIBRATH",
+      "from_stn_name": "Hazrat Nizamuddin",
+      "from_stn_code": "NZM",
+      "to_stn_name": "Bandra Terminus",
+      "to_stn_code": "BDTS",
+      "from_time": "16.30",
+      "to_time": "09.15",
+      "travel_time": "16.45",
+      "running_days": "0010101",
+      "type": "RAIL_MOTOR",
+      "train_id": "2590",
+      "distance_from_to": "1366",
+      "average_speed": "82"
+    }
+  },
+  {
+    "trainNo": "12926",
+    "data": {
+      "train_no": "12926",
+      "train_name": "PASCHIM EXPRESS",
+      "from_stn_name": "Amritsar Jn",
+      "from_stn_code": "ASR",
+      "to_stn_name": "Bandra Terminus",
+      "to_stn_code": "BDTS",
+      "from_time": "07.20",
+      "to_time": "14.40",
+      "travel_time": "31.20",
+      "running_days": "1111111",
+      "type": "SUPERFAST",
+      "train_id": "2606",
+      "distance_from_to": "1887",
+      "average_speed": "60"
+    }
+  },
+  {
+    "trainNo": "12954",
+    "data": {
+      "train_no": "12954",
+      "train_name": "AK TEJAS RAJ EX",
+      "from_stn_name": "Hazrat Nizamuddin",
+      "from_stn_code": "NZM",
+      "to_stn_name": "Mumbai Central",
+      "to_stn_code": "MMCT",
+      "from_time": "17.15",
+      "to_time": "10.05",
+      "travel_time": "16.50",
+      "running_days": "1111111",
+      "type": "RAJDHANI",
+      "train_id": "2638",
+      "distance_from_to": "1377",
+      "average_speed": "82"
+    }
+  },
+  {
+    "trainNo": "19020",
+    "data": {
+      "train_no": "19020",
+      "train_name": "HW BDTS EXP",
+      "from_stn_name": "Haridwar Jn",
+      "from_stn_code": "HW",
+      "to_stn_name": "Bandra Terminus",
+      "to_stn_code": "BDTS",
+      "from_time": "13.30",
+      "to_time": "22.30",
+      "travel_time": "33.00",
+      "running_days": "1111111",
+      "type": "MAIL_EXPRESS",
+      "train_id": "5519",
+      "distance_from_to": "1616",
+      "average_speed": "49"
+    }
+  },
+  {
+    "trainNo": "22414",
+    "data": {
+      "train_no": "22414",
+      "train_name": "NZM MAO RAJDANI",
+      "from_stn_name": "Hazrat Nizamuddin",
+      "from_stn_code": "NZM",
+      "to_stn_name": "Madgaon",
+      "to_stn_code": "MAO",
+      "from_time": "06.16",
+      "to_time": "07.35",
+      "travel_time": "25.19",
+      "running_days": "0000110",
+      "type": "RAJDHANI",
+      "train_id": "5954",
+      "distance_from_to": "2094",
+      "average_speed": "83"
+    }
+  },
+  {
+    "trainNo": "12264",
+    "data": {
+      "train_no": "12264",
+      "train_name": "PUNE DURNTO EXP",
+      "from_stn_name": "Hazrat Nizamuddin",
+      "from_stn_code": "NZM",
+      "to_stn_name": "Pune Jn",
+      "to_stn_code": "PUNE",
+      "from_time": "06.16",
+      "to_time": "02.10",
+      "travel_time": "19.54",
+      "running_days": "1001000",
+      "type": "RAJDHANI",
+      "train_id": "8858",
+      "distance_from_to": "1520",
+      "average_speed": "76"
+    }
+  },
+  {
+    "trainNo": "12218",
+    "data": {
+      "train_no": "12218",
+      "train_name": "KERLA S KRANTI",
+      "from_stn_name": "Chandigarh",
+      "from_stn_code": "CDG",
+      "to_stn_name": "Thiruvananthapuram North",
+      "to_stn_code": "TVCN",
+      "from_time": "09.30",
+      "to_time": "12.30",
+      "travel_time": "51.00",
+      "running_days": "0010100",
+      "type": "SUPERFAST",
+      "train_id": "8875",
+      "distance_from_to": "3415",
+      "average_speed": "67"
+    }
+  },
+  {
+    "trainNo": "12215",
+    "data": {
+      "train_no": "12215",
+      "train_name": "BDTS GARIB RATH",
+      "from_stn_name": "Delhi S Rohilla",
+      "from_stn_code": "DEE",
+      "to_stn_name": "Bandra Terminus",
+      "to_stn_code": "BDTS",
+      "from_time": "08.55",
+      "to_time": "07.35",
+      "travel_time": "22.40",
+      "running_days": "1101010",
+      "type": "RAIL_MOTOR",
+      "train_id": "8882",
+      "distance_from_to": "1433",
+      "average_speed": "63"
+    }
+  },
+  {
+    "trainNo": "12952",
+    "data": {
+      "train_no": "12952",
+      "train_name": "MMCT TEJAS RAJ",
+      "from_stn_name": "New Delhi",
+      "from_stn_code": "NDLS",
+      "to_stn_name": "Mumbai Central",
+      "to_stn_code": "MMCT",
+      "from_time": "16.55",
+      "to_time": "08.35",
+      "travel_time": "15.40",
+      "running_days": "1111111",
+      "type": "RAJDHANI",
+      "train_id": "9012",
+      "distance_from_to": "1384",
+      "average_speed": "88"
+    }
+  },
+  {
+    "trainNo": "12494",
+    "data": {
+      "train_no": "12494",
+      "train_name": "DARSHAN EXPRESS",
+      "from_stn_name": "Hazrat Nizamuddin",
+      "from_stn_code": "NZM",
+      "to_stn_name": "Miraj Jn",
+      "to_stn_code": "MRJ",
+      "from_time": "21.40",
+      "to_time": "00.40",
+      "travel_time": "27.00",
+      "running_days": "0000100",
+      "type": "SUPERFAST",
+      "train_id": "9120",
+      "distance_from_to": "1799",
+      "average_speed": "67"
+    }
+  },
+  {
+    "trainNo": "12248",
+    "data": {
+      "train_no": "12248",
+      "train_name": "BANDRA YUVA EXP",
+      "from_stn_name": "Hazrat Nizamuddin",
+      "from_stn_code": "NZM",
+      "to_stn_name": "Bandra Terminus",
+      "to_stn_code": "BDTS",
+      "from_time": "16.30",
+      "to_time": "09.15",
+      "travel_time": "16.45",
+      "running_days": "0000010",
+      "type": "SUPERFAST",
+      "train_id": "9181",
+      "distance_from_to": "1366",
+      "average_speed": "82"
+    }
+  },
+  {
+    "trainNo": "12284",
+    "data": {
+      "train_no": "12284",
+      "train_name": "NZM ERS DURONTO",
+      "from_stn_name": "Hazrat Nizamuddin",
+      "from_stn_code": "NZM",
+      "to_stn_name": "Ernakulam Jn",
+      "to_stn_code": "ERS",
+      "from_time": "21.40",
+      "to_time": "14.40",
+      "travel_time": "41.00",
+      "running_days": "0000010",
+      "type": "RAJDHANI",
+      "train_id": "9292",
+      "distance_from_to": "2943",
+      "average_speed": "72"
+    }
+  },
+  {
+    "trainNo": "22950",
+    "data": {
+      "train_no": "22950",
+      "train_name": "DEE BDTS SF EXP",
+      "from_stn_name": "Delhi S Rohilla",
+      "from_stn_code": "DEE",
+      "to_stn_name": "Bandra Terminus",
+      "to_stn_code": "BDTS",
+      "from_time": "16.15",
+      "to_time": "15.10",
+      "travel_time": "22.55",
+      "running_days": "0001000",
+      "type": "SUPERFAST",
+      "train_id": "9511",
+      "distance_from_to": "1345",
+      "average_speed": "59"
+    }
+  },
+  {
+    "trainNo": "12172",
+    "data": {
+      "train_no": "12172",
+      "train_name": "HW LTT AC EXP",
+      "from_stn_name": "Haridwar Jn",
+      "from_stn_code": "HW",
+      "to_stn_name": "Lokmanyatilak",
+      "to_stn_code": "LTT",
+      "from_time": "17.20",
+      "to_time": "21.30",
+      "travel_time": "28.10",
+      "running_days": "0100100",
+      "type": "SUPERFAST",
+      "train_id": "12937",
+      "distance_from_to": "1771",
+      "average_speed": "63"
+    }
+  },
+  {
+    "trainNo": "01492",
+    "data": {
+      "train_no": "01492",
+      "train_name": "NZM PUNE SPL",
+      "from_stn_name": "Hazrat Nizamuddin",
+      "from_stn_code": "NZM",
+      "to_stn_name": "Pune Jn",
+      "to_stn_code": "PUNE",
+      "from_time": "21.25",
+      "to_time": "23.55",
+      "travel_time": "26.30",
+      "running_days": "0000010",
+      "type": "SUPERFAST",
+      "train_id": "13163",
+      "distance_from_to": "1520",
+      "average_speed": "57"
+    }
+  },
+  {
+    "trainNo": "22222",
+    "data": {
+      "train_no": "22222",
+      "train_name": "CSMT RAJDHANI",
+      "from_stn_name": "Hazrat Nizamuddin",
+      "from_stn_code": "NZM",
+      "to_stn_name": "C Shivaji Maharaj T",
+      "to_stn_code": "CSMT",
+      "from_time": "16.55",
+      "to_time": "11.15",
+      "travel_time": "18.20",
+      "running_days": "1111111",
+      "type": "RAJDHANI",
+      "train_id": "14022",
+      "distance_from_to": "1536",
+      "average_speed": "84"
+    }
+  },
+  {
+    "trainNo": "22452",
+    "data": {
+      "train_no": "22452",
+      "train_name": "CDG BDTS EXP",
+      "from_stn_name": "Chandigarh",
+      "from_stn_code": "CDG",
+      "to_stn_name": "Bandra Terminus",
+      "to_stn_code": "BDTS",
+      "from_time": "05.40",
+      "to_time": "07.35",
+      "travel_time": "25.55",
+      "running_days": "0010001",
+      "type": "SUPERFAST",
+      "train_id": "14359",
+      "distance_from_to": "1607",
+      "average_speed": "62"
+    }
+  },
+  {
+    "trainNo": "22210",
+    "data": {
+      "train_no": "22210",
+      "train_name": "MMCT DURONTO",
+      "from_stn_name": "Hazrat Nizamuddin",
+      "from_stn_code": "NZM",
+      "to_stn_name": "Dadar Wr",
+      "to_stn_code": "DDR",
+      "from_time": "22.15",
+      "to_time": "15.48",
+      "travel_time": "17.33",
+      "running_days": "0100010",
+      "type": "RAJDHANI",
+      "train_id": "14379",
+      "distance_from_to": "1371",
+      "average_speed": "78"
+    }
+  },
+  {
+    "trainNo": "22918",
+    "data": {
+      "train_no": "22918",
+      "train_name": "HW BDTS SF EXP",
+      "from_stn_name": "Haridwar Jn",
+      "from_stn_code": "HW",
+      "to_stn_name": "Bandra Terminus",
+      "to_stn_code": "BDTS",
+      "from_time": "17.20",
+      "to_time": "17.00",
+      "travel_time": "23.40",
+      "running_days": "0001000",
+      "type": "SUPERFAST",
+      "train_id": "16236",
+      "distance_from_to": "1616",
+      "average_speed": "68"
+    }
+  },
+  {
+    "trainNo": "22634",
+    "data": {
+      "train_no": "22634",
+      "train_name": "NZM TVC EXPRESS",
+      "from_stn_name": "Hazrat Nizamuddin",
+      "from_stn_code": "NZM",
+      "to_stn_name": "Thiruvananthapuram Central",
+      "to_stn_code": "TVC",
+      "from_time": "22.15",
+      "to_time": "19.35",
+      "travel_time": "45.20",
+      "running_days": "0000100",
+      "type": "SUPERFAST",
+      "train_id": "16710",
+      "distance_from_to": "3149",
+      "average_speed": "69"
+    }
+  },
+  {
+    "trainNo": "22544",
+    "data": {
+      "train_no": "22544",
+      "train_name": "LKU BDTS SUP EXP",
+      "from_stn_name": "Lal Kuan",
+      "from_stn_code": "LKU",
+      "to_stn_name": "Bandra Terminus",
+      "to_stn_code": "BDTS",
+      "from_time": "07.45",
+      "to_time": "08.30",
+      "travel_time": "24.45",
+      "running_days": "1000000",
+      "type": "SUPERFAST",
+      "train_id": "22070",
+      "distance_from_to": "1624",
+      "average_speed": "66"
+    }
+  }
+]

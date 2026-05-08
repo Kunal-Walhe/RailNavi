@@ -10,9 +10,10 @@ interface DashboardProps {
   activeStation: Station;
   trains: Train[];
   onNavigate: () => void;
+  onViewAllTrains: () => void;
 }
 
-const Dashboard: React.FC<DashboardProps> = ({ activeStation, trains, onNavigate }) => {
+const Dashboard: React.FC<DashboardProps> = ({ activeStation, trains, onNavigate, onViewAllTrains }) => {
   const { t } = useTranslation();
   const [weather, setWeather] = React.useState<any>(null);
 
@@ -25,6 +26,15 @@ const Dashboard: React.FC<DashboardProps> = ({ activeStation, trains, onNavigate
     };
     loadWeather();
   }, [activeStation]);
+
+  const activeTrainsCount = trains.length;
+  const delayedTrains = trains.filter(t => (t.delayInMinutes || 0) > 0);
+  const avgDelay = delayedTrains.length > 0 
+    ? Math.round(delayedTrains.reduce((acc, t) => acc + (t.delayInMinutes || 0), 0) / delayedTrains.length) 
+    : 0;
+  
+  // Base footfall on active trains (approx 800 per train) and platforms
+  const footfall = ((activeTrainsCount * 800 + activeStation.platforms.length * 1500) / 1000).toFixed(1) + 'k';
 
   return (
     <div className="space-y-8 animate-in fade-in slide-in-from-bottom-3 duration-700">
@@ -49,7 +59,7 @@ const Dashboard: React.FC<DashboardProps> = ({ activeStation, trains, onNavigate
           )}
           <button className="bg-white dark:bg-slate-800 hover:bg-gray-50 dark:hover:bg-slate-700 border border-gray-300 dark:border-slate-700 text-gray-700 dark:text-gray-300 px-4 py-2 rounded shadow-sm text-sm font-semibold transition-all flex items-center gap-2">
             <Clock size={16} />
-            {new Date().toLocaleDateString('en-IN', { weekday: 'short', day: '2-digit', month: 'short' })}
+            {new Date().toLocaleDateString('en-IN', { weekday: 'short', day: '2-digit', month: 'short' })} • {new Date().toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit', hour12: true })}
           </button>
           <button className="bg-blue-700 hover:bg-blue-800 text-white px-4 py-2 rounded shadow-sm text-sm font-semibold transition-all">
             {t('dashboard.generate_report')}
@@ -60,10 +70,10 @@ const Dashboard: React.FC<DashboardProps> = ({ activeStation, trains, onNavigate
       {/* Stats Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         {[
-          { label: t('dashboard.active_trains'), value: '24', icon: TrainIcon, color: 'text-blue-700 dark:text-blue-400', bg: 'bg-blue-50 dark:bg-blue-900/30', border: 'border-blue-200 dark:border-blue-800' },
+          { label: t('dashboard.active_trains'), value: activeTrainsCount.toString(), icon: TrainIcon, color: 'text-blue-700 dark:text-blue-400', bg: 'bg-blue-50 dark:bg-blue-900/30', border: 'border-blue-200 dark:border-blue-800' },
           { label: t('dashboard.total_platforms'), value: activeStation.platforms.length.toString(), icon: Map, color: 'text-emerald-700 dark:text-emerald-400', bg: 'bg-emerald-50 dark:bg-emerald-900/30', border: 'border-emerald-200 dark:border-emerald-800' },
-          { label: t('dashboard.est_footfall'), value: '45.2k', icon: Users, color: 'text-orange-700 dark:text-orange-400', bg: 'bg-orange-50 dark:bg-orange-900/30', border: 'border-orange-200 dark:border-orange-800' },
-          { label: t('dashboard.avg_delay'), value: `4 ${t('dashboard.mins')}`, icon: Clock, color: 'text-indigo-700 dark:text-indigo-400', bg: 'bg-indigo-50 dark:bg-indigo-900/30', border: 'border-indigo-200 dark:border-indigo-800' },
+          { label: t('dashboard.est_footfall'), value: footfall, icon: Users, color: 'text-orange-700 dark:text-orange-400', bg: 'bg-orange-50 dark:bg-orange-900/30', border: 'border-orange-200 dark:border-orange-800' },
+          { label: t('dashboard.avg_delay'), value: `${avgDelay} ${t('dashboard.mins')}`, icon: Clock, color: 'text-indigo-700 dark:text-indigo-400', bg: 'bg-indigo-50 dark:bg-indigo-900/30', border: 'border-indigo-200 dark:border-indigo-800' },
         ].map((stat, i) => (
           <div key={i} className={`bg-white dark:bg-slate-900 p-6 rounded border ${stat.border} shadow-sm flex items-center gap-4 hover:shadow-md transform hover:scale-[1.02] transition-all duration-300 cursor-default`}>
             <div className={`${stat.bg} ${stat.color} p-3 rounded-full border border-current border-opacity-10 dark:border-opacity-20`}>
@@ -101,7 +111,7 @@ const Dashboard: React.FC<DashboardProps> = ({ activeStation, trains, onNavigate
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-100 dark:divide-slate-800/50">
-                {trains.map((train) => (
+                {trains.slice(0, 7).map((train) => (
                   <tr key={train.id} className="hover:bg-blue-50/50 dark:hover:bg-blue-900/10 transition-colors text-sm">
                     <td className="px-6 py-4">
                       <p className="font-bold text-blue-800 dark:text-blue-300">{train.number}</p>
@@ -124,10 +134,30 @@ const Dashboard: React.FC<DashboardProps> = ({ activeStation, trains, onNavigate
                           <span className="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
                           {t('dashboard.on_time')}
                         </div>
-                      ) : (
+                      ) : train.status === 'DELAYED' ? (
                         <div className="inline-flex items-center gap-1.5 text-red-700 dark:text-red-400 text-xs font-bold bg-red-50 dark:bg-red-950/30 px-2.5 py-1 rounded border border-red-200 dark:border-red-800/50">
-                          <span className="w-1.5 h-1.5 rounded-full bg-red-500"></span>
+                          <span className="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse"></span>
                           {t('dashboard.delay')} {train.delayInMinutes}{t('dashboard.mins')}
+                        </div>
+                      ) : train.status === 'BOARDING' ? (
+                        <div className="inline-flex items-center gap-1.5 text-blue-700 dark:text-blue-400 text-xs font-bold bg-blue-50 dark:bg-blue-950/30 px-2.5 py-1 rounded border border-blue-200 dark:border-blue-800/50">
+                          <span className="w-1.5 h-1.5 rounded-full bg-blue-500 animate-pulse"></span>
+                          BOARDING
+                        </div>
+                      ) : train.status === 'DEPARTED' ? (
+                        <div className="inline-flex items-center gap-1.5 text-gray-600 dark:text-gray-400 text-xs font-bold bg-gray-100 dark:bg-slate-800 px-2.5 py-1 rounded border border-gray-200 dark:border-slate-700">
+                          <span className="w-1.5 h-1.5 rounded-full bg-gray-400"></span>
+                          DEPARTED
+                        </div>
+                      ) : train.status === 'RESCHEDULED' ? (
+                        <div className="inline-flex items-center gap-1.5 text-purple-700 dark:text-purple-400 text-xs font-bold bg-purple-50 dark:bg-purple-950/30 px-2.5 py-1 rounded border border-purple-200 dark:border-purple-800/50">
+                          <span className="w-1.5 h-1.5 rounded-full bg-purple-500 animate-pulse"></span>
+                          RESCHEDULED
+                        </div>
+                      ) : (
+                        <div className="inline-flex items-center gap-1.5 text-amber-700 dark:text-amber-400 text-xs font-bold bg-amber-50 dark:bg-amber-950/30 px-2.5 py-1 rounded border border-amber-200 dark:border-amber-800/50">
+                          <span className="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse"></span>
+                          ARRIVING SOON
                         </div>
                       )}
                     </td>
@@ -137,7 +167,10 @@ const Dashboard: React.FC<DashboardProps> = ({ activeStation, trains, onNavigate
             </table>
           </div>
           <div className="p-3 border-t border-gray-200 dark:border-slate-800 bg-gray-50 dark:bg-slate-950/50 text-center">
-            <button className="text-xs font-bold text-blue-700 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 hover:underline uppercase tracking-wide">
+            <button 
+              onClick={onViewAllTrains}
+              className="text-xs font-bold text-blue-700 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 hover:underline uppercase tracking-wide"
+            >
               {t('dashboard.view_all_trains')}
             </button>
           </div>

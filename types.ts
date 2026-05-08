@@ -55,6 +55,6 @@ export interface Train {
   arrivalTime: string;
   departureTime: string;
   platform: number;
-  status: 'ON_TIME' | 'DELAYED' | 'CANCELLED';
+  status: 'ON_TIME' | 'DELAYED' | 'CANCELLED' | 'BOARDING' | 'ARRIVING_SOON' | 'DEPARTED' | 'RESCHEDULED';
   delayInMinutes?: number;
 }

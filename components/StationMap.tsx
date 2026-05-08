@@ -280,7 +280,7 @@ const StationMap: React.FC<StationMapProps> = ({ station }) => {
 
           {/* Satellite Map Component */}
           <div className={`bg-white/80 dark:bg-slate-900/80 backdrop-blur-md rounded-[2.5rem] border border-gray-200 dark:border-slate-800 shadow-2xl overflow-hidden transition-all duration-500 relative group ${isMapExpanded ? 'h-[600px]' : 'h-[350px]'}`}>
-            <div className="absolute top-6 left-6 z-10 flex items-center gap-3">
+            <div className="absolute top-6 right-6 z-10 flex items-center gap-3">
               <div className="bg-white/90 dark:bg-slate-950/80 backdrop-blur-md p-4 rounded-2xl border border-gray-200 dark:border-slate-800 shadow-2xl">
                 <p className="text-[10px] font-bold text-gray-500 dark:text-slate-500 uppercase tracking-widest mb-1">{t('station_map.live_feed')}</p>
                 <p className="text-xs font-black text-gray-900 dark:text-white font-mono tracking-tight">{t('station_map.coordinates').replace('LAT', 'LAT').replace('LNG', 'LNG')}: {station.coordinates.lat.toFixed(4)} {station.coordinates.lng.toFixed(4)}</p>

@@ -4,7 +4,6 @@ import react from '@vitejs/plugin-react';
 
 export default defineConfig(({ mode }) => {
     const env = loadEnv(mode, '.', '');
-    console.log("BUILD CHECK: VITE_OPENWEATHER_API_KEY is", env.VITE_OPENWEATHER_API_KEY ? "PRESENT" : "MISSING!");
     return {
       server: {
         port: 5173,

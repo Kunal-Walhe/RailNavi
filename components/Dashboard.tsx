@@ -3,7 +3,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Station, Train } from '../types';
 // Fixed error: Added Navigation2 to the lucide-react import list
-import { Train as TrainIcon, Map, Users, Clock, AlertCircle, ArrowUpRight, Navigation2, Cloud, Droplets, Wind } from 'lucide-react';
+import { Train as TrainIcon, Map, Users, Clock, AlertCircle, Navigation2, Cloud } from 'lucide-react';
 import { fetchWeather } from '../services/weatherService';
 
 interface DashboardProps {

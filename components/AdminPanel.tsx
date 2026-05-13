@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Plus, Edit2, Trash2, Save, PlusCircle, Shield, Database, Layout as LayoutIcon, X, ArrowLeft } from 'lucide-react';
-import { Station, Train, ServiceType, Facility, Platform } from '../types';
+import { Station, Train, ServiceType, Facility } from '../types';
 
 interface AdminPanelProps {
   stations: Station[];

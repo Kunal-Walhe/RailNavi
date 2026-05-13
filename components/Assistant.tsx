@@ -1,7 +1,7 @@
 
 import React, { useState, useRef, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Send, Bot, User as UserIcon, Loader2, Navigation, Sparkles, Wand2, Zap, AlertCircle } from 'lucide-react';
+import { Send, Bot, User as UserIcon, Zap, AlertCircle } from 'lucide-react';
 import { getSmartNavigationStream } from '../services/aiService';
 import { Station } from '../types';
 import { GenerateContentResponse } from '@google/genai';

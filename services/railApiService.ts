@@ -1,9 +1,6 @@
 import trainsDB from './trainsDB.json';
 
-export const fetchLiveStation = async (stationCode: string) => {
-  // Return mock success for local db mode
-  return { success: true, data: { status: 'Live' } };
-};
+
 
 const parseTimeToMins = (timeStr: string): number => {
   if (!timeStr || timeStr === 'None' || timeStr === '--:--') return -1;
